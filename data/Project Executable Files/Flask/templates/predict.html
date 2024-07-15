@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Anemia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px #aaa;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<nav>
+    <ul>
+        <li><a href="home">Home</a></li>
+        <li><a href="index">About</a></li>
+        <li><a href="">Predict</a></li>
+    </ul>
+</nav>
+<body>
+    <div class="container">
+        <h2>Predict Anemia</h2>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" placeholder="Enter gender (Male/Female)">
+        </div>
+        <div class="form-group">
+            <label for="hemoglobin">Hemoglobin (Range: 7-16):</label>
+            <input type="number" id="hemoglobin" placeholder="Enter Hemoglobin">
+        </div>
+        <div class="form-group">
+            <label for="mch">Mean Corpuscular Hemoglobin (Range: 16-30):</label>
+            <input type="number" id="mch" placeholder="Enter Mean Corpuscular Hemoglobin">
+        </div>
+        <div class="form-group">
+            <label for="mchc">Mean Corpuscular Hemoglobin Concentration (Range: 28-34):</label>
+            <input type="number" id="mchc" placeholder="Enter Mean Corpuscular Hemoglobin Concentration">
+        </div>
+        <div class="form-group">
+            <label for="mcv">Mean Corpuscular Volume (Range: 70-100):</label>
+            <input type="number" id="mcv" placeholder="Enter Mean Corpuscular Volume">
+        </div>
+        <div class="form-group">
+            <button onclick="predictAnemia()">Submit</button>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function predictAnemia() {
+            const gender = document.getElementById('gender').value;
+            const hemoglobin = parseFloat(document.getElementById('hemoglobin').value);
+            const mch = parseFloat(document.getElementById('mch').value);
+            const mchc = parseFloat(document.getElementById('mchc').value);
+            const mcv = parseFloat(document.getElementById('mcv').value);
+
+            let resultText = '';
+
+            if (hemoglobin < 7 || hemoglobin > 16 || mch < 16 || mch > 30 || mchc < 28 || mchc > 34 || mcv < 70 || mcv > 100) {
+                resultText = 'Please enter values within specific ranges.';
+            } else {
+                // Simple check for anemia based on typical hemoglobin levels
+                if (hemoglobin < 12) {
+                    resultText = 'Anemia detected.';
+                } else {
+                    resultText = 'No anemia detected.';
+                }
+            }
+
+            document.getElementById('result').textContent = resultText;
+        }
+    </script>
+</body>
+</html>
